@@ -32,7 +32,7 @@ class CreditCard < ApplicationRecord
       update_attribute(:current_payment_period_start_date, current_payment_period_start_date + 30.days)
     else
       status = false
-      message = "This action could not be completed. The credit card's payment period has not ended. The payment period may only be closed on or after #{current_payment_period_end_date.strftime("%M/%D/%Y")}."
+      message = "This action could not be completed. The credit card's payment period has not ended. The payment period may only be closed on or after #{current_payment_period_end_date.strftime(DATE_FORMAT)}."
     end
     {
       status: status ? API::SUCCESS : API::FAIL,

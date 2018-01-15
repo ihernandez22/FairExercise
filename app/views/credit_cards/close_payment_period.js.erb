@@ -1,4 +1,4 @@
-alert("<%= @cpp[:message] %>");
+alert(escape_js("<%= @cpp[:message] %>"));
 <% if @cpp[:status] == API::SUCCESS %>
   window.location.reload();
 <% else %>

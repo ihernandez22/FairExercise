@@ -6,19 +6,21 @@
   <p>You can start by going to the Credit Cards page where you can create and view credit cards. I recommend using December 1, 2017 as the "Current Period Payment Start Date". It will be easy to add a transaction as the 15th day, because that would simply be December 15, 2017. The payment period must have also ended in order to access the "Close Payment Period" feature (so the payment period start date must be 30 days before today to access that feature).</p>
   <p>Once a credit card is created, you can click on it to view the credit card's information. This section also has a feature to create transactions. You may create as many transactions as you'd like.</p>
   <p>If today is your credit card's Current Payment Period End Date, or that day has passed you can close out the payment period (as explained above). An interest charge will be created if applicable.</p>
+  <p>I have already recreated the test cases (with the credit cards named Dave Chapelle and Jerry Seinfeld), and below are step by step instructions on how you can do the same.</p>
   <p> Steps to recreate Test Case 1 from the <%= link_to "spec", "https://github.com/wearefair/interview/tree/master/engineering" %>:</p>
-<ul>
-  <li>Create a credit card with the default start date.</li>
-  <li>Create a draw transaction on November 30, 2017 (11/30/2017) for $500.00.</li>
-  <li>Close the payment period.</li>
-</ul>
-<p>Steps to recreate Test Case 2 from the <%= link_to "spec", "https://github.com/wearefair/interview/tree/master/engineering" %>:</p>
-<ul>
-  <li>Create a credit card with the default start date.</li>
-  <li>Create a draw transaction on November 30, 2017 (11/30/2017) for $500.00.</li>
-  <li>Create a payment transaction on December 15, 2017 (12/15/2017) for $200.00.</li>
-  <li>Create a draw transaction on December 25, 2017 (12/25/2017) for $100.00.</li>
-  <li>Close the payment period.</li>
-</ul>
+  <ul>
+    <li>Create a credit card with the default start date.</li>
+    <li>Create a draw transaction on November 30, 2017 (11/30/2017) for $500.00.</li>
+    <li>Close the payment period.</li>
+  </ul>
+  <p>Steps to recreate Test Case 2 from the <%= link_to "spec", "https://github.com/wearefair/interview/tree/master/engineering" %>:</p>
+  <ul>
+    <li>Create a credit card with the default start date.</li>
+    <li>Create a draw transaction on November 30, 2017 (11/30/2017) for $500.00.</li>
+    <li>Create a payment transaction on December 15, 2017 (12/15/2017) for $200.00.</li>
+    <li>Create a draw transaction on December 25, 2017 (12/25/2017) for $100.00.</li>
+    <li>Close the payment period.</li>
+  </ul>
+  <p><b>Note:</b> The spec for the test cases above say there are transactions for day 1, but in order for the math to be consistent I think the test cases meant to say those are initial balances existing before day 1 (which is why the steps say to use November 30 instead of December 1).</p>
   <p>If you have any questions, please contact me.</p>
 </div>
