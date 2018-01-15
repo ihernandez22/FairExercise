@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FairExercise</title>
+    <meta charset="utf-9">
+    <title>Fair Exercise</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%= javascript_include_tag 'application' %>
+		<!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   </head>
-
   <body>
-    <%= yield %>
+		<nav id="site_header" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <h3><%= link_to "Fair Exercise", root_path %></h3>
+        <div class="navbar-header">
+          <button id="hamburger_button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my_nav_bar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="my_nav_bar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="menu_element"><%= link_to "HOME", root_path %></li>
+            <li class="menu_element"><%= link_to "CREDIT CARDS", credit_cards_path %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="page_contents" class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

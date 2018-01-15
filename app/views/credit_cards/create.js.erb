@@ -1,0 +1,6 @@
+<% if @credit_card.valid? %>
+  alert("The credit card has successfully been created.");
+  window.location.href = "<%= "#{credit_cards_path}/#{@credit_card.id}" %>";
+<% else %>
+  alert(escape_js("<%= error_message(@credit_card) %>"));
+<% end %>

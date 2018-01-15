@@ -1,0 +1,72 @@
+transaction:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: <%= CreditCard::CREDIT_LIMIT/2 %>
+  credit_card: credit_card 
+
+# what the numbers mean: test_[payment_type]_[amount]_[day_of_payment_paeriod]_[interest_transaction_amount]
+test_draw_500_0_1438:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 500
+  credit_card: test_case_1438
+
+test_draw_500_0_1199:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 500
+  credit_card: test_case_1199
+
+test_payment_200_15_1199:
+  date: <%= 16.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
+  amount: 200
+  credit_card: test_case_1199
+
+test_draw_100_25_1199:
+  date: <%= 6.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 100
+  credit_card: test_case_1199
+
+test_draw_500_0_911_surplus:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 500
+  credit_card: test_case_911_surplus
+
+test_payment_1000_15_911_surplus:
+  date: <%= 16.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
+  amount: 1000
+  credit_card: test_case_911_surplus
+
+test_draw_900_25_911_surplus:
+  date: <%= 6.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 900
+  credit_card: test_case_911_surplus
+
+test_draw_500_0_911_even:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 500
+  credit_card: test_case_911_even
+
+test_payment_1000_15_911_even:
+  date: <%= 16.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
+  amount: 500
+  credit_card: test_case_911_even
+
+test_draw_900_25_911_even:
+  date: <%= 6.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 400
+  credit_card: test_case_911_even
+
+test_payment_surplus:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
+  amount: <%= CreditCard::CREDIT_LIMIT*2 %>
+  credit_card: test_case_surplus

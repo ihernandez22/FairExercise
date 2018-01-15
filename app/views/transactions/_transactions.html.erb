@@ -1,0 +1,18 @@
+<table id="transactions_table" class="col-sm-12">
+  <tr>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Balance</th>
+  </tr>
+  <% balance = 0.0 %>
+  <% transactions.each do |t| %>
+    <% balance += t.net_amount %>
+    <tr>
+      <td><%= t.date.strftime(Transaction::DATE_FORMAT) %></td>
+      <td><%= t.transaction_type.titlecase %></td>
+      <td><%= number_to_currency(t.amount) %></td>
+      <td><%= number_to_currency(balance) %></td>
+    </tr>
+  <% end %>
+</table>

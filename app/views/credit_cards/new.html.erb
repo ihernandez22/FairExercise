@@ -1,0 +1,20 @@
+<div id="new_credit_card">
+  <div class="page_header col-sm-12">
+    <h4>Create Credit Card</h4>    
+  </div>
+  <div class="col-sm-12">
+    <%= form_for @credit_card, remote: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :current_payment_period_start_date, "Current Payment Period Start Date" %><br>
+        <%= f.date_field :current_payment_period_start_date, value: "2017-12-01", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Submit", class: "btn btn-success form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>
