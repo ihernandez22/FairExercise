@@ -103,6 +103,12 @@ class CreditCardTest < ActiveSupport::TestCase
     assert response[:status] == API::SUCCESS && response[:interest_transaction].amount = 9.11 && test_case_911_even.balance == 409.11
   end
 
+  test "should create an interest charge of $11.99 (multiple transactions in a day)" do
+    test_case_same_day = credit_cards(:test_case_same_day)
+    response = test_case_same_day.close_payment_period
+    assert response[:status] == API::SUCCESS && response[:interest_transaction].amount = 11.99 && test_case_same_day.balance == 411.99
+  end
+
   test "should move the current_period_payment_start_date up by 30 days" do
     test_case_1438 = credit_cards(:test_case_1438)
     prev_start_date = test_case_1438.current_payment_period_start_date

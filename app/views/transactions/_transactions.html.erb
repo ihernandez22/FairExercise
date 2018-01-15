@@ -12,7 +12,7 @@
       <td><%= t.date.strftime(Transaction::DATE_FORMAT) %></td>
       <td><%= t.transaction_type.titlecase %></td>
       <td><%= number_to_currency(t.amount) %></td>
-      <td><%= number_to_currency(balance) %></td>
+      <td><%= (t.date > Date.today) ? "PENDING" : number_to_currency(balance) %></td>
     </tr>
   <% end %>
 </table>

@@ -36,3 +36,7 @@ test_case_not_end_date:
   current_payment_period_start_date: <%= Date.today %>
   created_at: <%= Date.today %>
   updated_at: <%= Date.today %>
+
+test_case_same_day:
+  <<: *DEFAULTS
+  name: TestCaseSameDay

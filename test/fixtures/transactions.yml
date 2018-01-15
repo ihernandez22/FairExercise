@@ -70,3 +70,27 @@ test_payment_surplus:
   transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
   amount: <%= CreditCard::CREDIT_LIMIT*2 %>
   credit_card: test_case_surplus
+
+test_draw_500_0_same_day:
+  date: <%= 31.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 500
+  credit_card: test_case_same_day
+
+test_payment_400_15_same_day:
+  date: <%= 16.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_PAYMENT %>
+  amount: 400
+  credit_card: test_case_same_day
+
+test_draw_200_15_same_day:
+  date: <%= 16.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 200
+  credit_card: test_case_same_day
+
+test_draw_100_25_same_day:
+  date: <%= 6.days.ago %>
+  transaction_type: <%= Transaction::TRANSACTION_TYPE_DRAW %>
+  amount: 100
+  credit_card: test_case_same_day
