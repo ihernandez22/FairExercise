@@ -1,0 +1,15 @@
+<div id="index_credit_cards">
+  <div class="page_header col-sm-12">
+    <h4>Credit Cards</h4>
+    <%= link_to new_credit_card_path do %>
+      <button id="create_credit_card_button" type="button" class="btn btn-sm btn-success">Create Credit Card</button>
+    <% end %>
+  </div>
+  <div id="credit_card_links" class="col-sm-12">
+    <% @credit_cards.each do |cc| %>
+      <div class="credit_card_link">
+        <%= link_to cc.name, "#{credit_cards_path}/#{cc.id}" %>
+      </div>
+    <% end %>
+  </div>
+</div>

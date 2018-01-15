@@ -1,0 +1,35 @@
+<div id="show_credit_card">
+  <div class="page_header col-sm-12">
+    <h4><%= @credit_card.name %></h4>
+  </div>
+  <div class="col-sm-12">
+    <p><b>Payment Period Start Date:</b> <%= @credit_card.current_payment_period_start_date.strftime("%B %-d, %Y") %></p>
+    <p><b>Payment Period End Date:</b> <%= @credit_card.current_payment_period_end_date.strftime("%B %-d, %Y") %></p>
+  </div>
+  <div class="page_header col-sm-12">
+    <h4>Transactions</h4>
+		<%= link_to "#{credit_cards_path}/#{@credit_card.id}/transactions/new" do %>
+	    <button type="button" class="btn btn-sm btn-success">Add Transaction</button>
+    <% end %>
+  </div>
+  <div class="col-sm-12">
+    <%= render partial: "transactions/transactions", locals: { transactions: @credit_card.transactions.order(:date) } %>
+  </div>
+
+  <% if @credit_card.transactions.any? %>
+    <div id="close_payment_period" class="col-sm-12">
+      <button id="close_payment_period_button" class="btn btn-sm btn-danger">Close Payment Period</button>
+    </div>
+  <% end %>
+</div>
+
+<% if @credit_card.transactions.any? %>
+  <script>
+    $("#close_payment_period_button").on("click", function() {
+      $("#close_payment_period_button").attr("disabled", "true").html("Processing...");
+      if(confirm("Are you sure you want to close the current payment period? This cannot be undone.")) {
+        $.getScript("<%= "#{credit_cards_path}/#{@credit_card.id}/close_payment_period" %>");
+      }
+    });
+  </script>
+<% end %>

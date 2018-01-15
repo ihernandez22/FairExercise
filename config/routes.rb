@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :credit_cards, only: [:show, :create] do
-    resources :transactions, only: [:create]
+  root "application#index"
+  resources :credit_cards, only: [:index, :new, :create, :show] do
+    resources :transactions, only: [:new, :create]
   end
-  post "credit_cards/:id/close_payment_period", to: "credit_cards#close_payment_period"
+  get "credit_cards/:id/close_payment_period", to: "credit_cards#close_payment_period"
 end

@@ -23,7 +23,7 @@ class CreditCardTest < ActiveSupport::TestCase
   test "should be invalid credit card due to missing start date" do
     credit_card = credit_cards(:credit_card)
     credit_card.current_payment_period_start_date = nil
-    assert credit_card.valid? && credit_card.current_payment_period_start_date == Date.today
+    assert_not credit_card.valid?
   end
 
   test "should be invalid due to the amount causing credit card to go over limit" do
@@ -124,8 +124,8 @@ class CreditCardTest < ActiveSupport::TestCase
     checks = true
     if json_hash[:credit_card] && json_hash[:credit_card][:transactions]
       checks &&= json_hash[:credit_card][:name] == "TestCase1199"
-      checks &&= json_hash[:credit_card][:current_payment_period_start_date] == (30.days.ago).strftime(CreditCard::DATE_FORMAT)
-      checks &&= json_hash[:credit_card][:current_payment_period_end_date] == (Date.today).strftime(CreditCard::DATE_FORMAT)
+      checks &&= json_hash[:credit_card][:current_payment_period_start_date] == (Date.today).strftime(CreditCard::DATE_FORMAT)
+      checks &&= json_hash[:credit_card][:current_payment_period_end_date] == (Date.today + 29.days).strftime(CreditCard::DATE_FORMAT)
       checks &&= json_hash[:credit_card][:current_balance] == 411.99
       checks &&= json_hash[:credit_card][:transactions].count == 4
       checks &&= json_hash[:credit_card][:transactions][0][:amount] == 500.0

@@ -1,0 +1,6 @@
+<% if @transaction.valid? %>
+	alert("The transaction has successfully been created.");
+	window.location.href = "<%= "#{credit_cards_path}/#{@credit_card.id}" %>";
+<% else %>
+	alert(escape_js("<%= error_message(@transaction) %>"));
+<% end %>

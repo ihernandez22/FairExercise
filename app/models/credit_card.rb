@@ -1,32 +1,14 @@
 class CreditCard < ApplicationRecord 
   CREDIT_LIMIT = 1000
   INTEREST_RATE = 0.35
-  DATE_FORMAT = "%m-%d-%Y"
+  DATE_FORMAT = "%m/%d/%Y"
 
   has_many :transactions, dependent: :destroy
-  before_validation :set_default_date
   validates :name, presence: true, uniqueness: true
   validates :current_payment_period_start_date, presence: true
 
   def current_payment_period_end_date
     current_payment_period_start_date + 29.days
-  end
-
-  # NOTE: the next two are for showing users
-  #       the column keeps track of which payment period has been handled
-  #       a payment period can be handled on the 30th (closing) day of a payment period
-  #       in this case, the start date in the column would move to the next payment period
-  #       but we still have to show the user that we are in the current payment period
-  def show_current_payment_period_start_date
-    if current_payment_period_start_date < Date.today
-      current_payment_period_start_date
-    else
-      current_payment_period_start_date - 30.days
-    end
-  end
-
-  def show_current_payment_period_end_date
-    show_current_payment_period_start_date + 29.days
   end
 
   def balance(at_date = Date.today)
@@ -41,6 +23,12 @@ class CreditCard < ApplicationRecord
     interest_transaction = nil
     if (Date.today - 29.days) >= current_payment_period_start_date
       interest_transaction = create_interest_charge
+      message = "The payment period has been closed and ";
+      if interest_transaction
+        message += "an interest charge for $#{interest_transaction.amount} has been created."
+      else
+        message += "no interest was charged."
+      end
       update_attribute(:current_payment_period_start_date, current_payment_period_start_date + 30.days)
     else
       status = false
@@ -60,8 +48,8 @@ class CreditCard < ApplicationRecord
       credit_card: {
         id: id,
         name: name,
-        current_payment_period_start_date: show_current_payment_period_start_date.strftime(DATE_FORMAT),
-        current_payment_period_end_date: show_current_payment_period_end_date.strftime(DATE_FORMAT),
+        current_payment_period_start_date: current_payment_period_start_date.strftime(DATE_FORMAT),
+        current_payment_period_end_date: current_payment_period_end_date.strftime(DATE_FORMAT),
         current_balance: balance,
         transactions: ts_arr
       }
@@ -85,10 +73,6 @@ private
     end
     interest_bal += ([prev_bal,0].max * INTEREST_RATE / 365 * (current_payment_period_end_date - prev_bal_date).to_i)
     transactions.create(date: Date.today, transaction_type: Transaction::TRANSACTION_TYPE_INTEREST, amount: interest_bal.round(2))
-  end
-
-  def set_default_date
-    self.current_payment_period_start_date = Date.today unless self.current_payment_period_start_date
   end
 
 end

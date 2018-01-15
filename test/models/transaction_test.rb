@@ -11,9 +11,9 @@ class TransactionTest < ActiveSupport::TestCase
     assert @transaction.valid?
   end
 
-  test "should be valid transaction with default date (today)" do
+  test "should not be valid transaction without date" do
     @transaction.date = nil
-    assert @transaction.valid? && @transaction.date == Date.today 
+    assert_not @transaction.valid? 
   end
 
   test "should be valid payment transaction" do

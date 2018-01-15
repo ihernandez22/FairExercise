@@ -1,0 +1,29 @@
+<div id="new_transaction">
+  <div class="page_header col-sm-12">
+    <h4>Create Transaction for <%= @credit_card.name %></h4>
+  </div>
+  <div class="col-sm-12">
+    <%= form_for @transaction, { url: "#{credit_cards_path}/#{@credit_card.id}/transactions", remote: true } do |f| %>
+      <div class="form-group">
+        <%= f.label :date %><br>
+        <%= f.date_field :date, value: Date.today.strftime("%Y-%m-%d"), class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <% 
+          arr = Array.new
+          Transaction::TRANSACTION_USER_SELECTABLE.each { |tt| arr.push([tt.titlecase, tt]) }
+        %>
+        <%= f.label :transaction_type %><br>
+        <%= f.select :transaction_type, options_for_select(arr), {}, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :amount %><br>
+        <%= f.text_field :amount, value: "0.00", class: "form-control" %>
+      </div>
+      <%= f.hidden_field :credit_card_id %>
+      <div class="form-group">
+        <%= f.submit "Submit", class: "btn btn-success form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>

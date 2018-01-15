@@ -1,0 +1,6 @@
+alert("<%= @cpp[:message] %>");
+<% if @cpp[:status] == API::SUCCESS %>
+  window.location.reload();
+<% else %>
+  $("#close_payment_period_button").removeAttr("disabled").html("Close Payment Period");
+<% end %>
