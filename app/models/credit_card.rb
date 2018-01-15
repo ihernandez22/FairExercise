@@ -68,8 +68,9 @@ private
       bal += t.net_amount
       if prev_bal_date < t.date
         interest_bal += ([prev_bal,0].max * INTEREST_RATE / 365 * (t.date - prev_bal_date).to_i)
-        prev_bal, prev_bal_date = bal, t.date
+        prev_bal_date = t.date
       end
+      prev_bal = bal
     end
     interest_bal += ([prev_bal,0].max * INTEREST_RATE / 365 * (current_payment_period_end_date - prev_bal_date).to_i)
     transactions.create(date: Date.today, transaction_type: Transaction::TRANSACTION_TYPE_INTEREST, amount: interest_bal.round(2))
