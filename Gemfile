@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails', '~> 5.1.4'
+gem 'rails', git: 'https://github.com/rails/rails.git' # temp while testing for minitest
 gem 'bootstrap-sass', '3.3.7'
 gem 'autoprefixer-rails'
 gem 'puma', '~> 3.7'

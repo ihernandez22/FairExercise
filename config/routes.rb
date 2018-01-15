@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :credit_cards, only: [:show, :create] do
+    resources :transactions, only: [:create]
+  end
+  post "credit_cards/:id/close_payment_period", to: "credit_cards#close_payment_period"
 end

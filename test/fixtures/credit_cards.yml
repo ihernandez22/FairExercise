@@ -1,0 +1,38 @@
+DEFAULTS: &DEFAULTS
+  current_payment_period_start_date: <%= 30.days.ago %>
+  created_at: <%= 30.days.ago %>
+  updated_at: <%= 30.days.ago %>
+
+credit_card:
+  <<: *DEFAULTS
+  name: James
+
+test_case_1438:
+  <<: *DEFAULTS
+  name: TestCase1438
+
+test_case_1199:
+  <<: *DEFAULTS
+  name: TestCase1199
+
+test_case_911_surplus:
+  <<: *DEFAULTS
+  name: TestCase911Surplus
+
+test_case_911_even:
+  <<: *DEFAULTS
+  name: TestCase911Even
+
+test_case_surplus:
+  <<: *DEFAULTS
+  name: TestCaseSurplus
+
+test_case_even:
+  <<: *DEFAULTS
+  name: TestCaseEven
+
+test_case_not_end_date:
+  name: TestCaseNotEndDate
+  current_payment_period_start_date: <%= Date.today %>
+  created_at: <%= Date.today %>
+  updated_at: <%= Date.today %>
